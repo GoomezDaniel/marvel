@@ -19,13 +19,12 @@ class _MyAppState extends State<MyApp> {
       title: 'marvel Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.grey,
-        backgroundColor: Colors.black,
-        primaryColor: Colors.white,
-        cardColor: Colors.grey[350],
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          brightness: Brightness.dark,
+          backgroundColor: Colors.black,
+          primaryColor: Colors.white,
+          cardColor: Colors.grey[350],
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          appBarTheme: AppBarTheme(backgroundColor: Colors.transparent)),
       home: HomePage(),
     );
   }

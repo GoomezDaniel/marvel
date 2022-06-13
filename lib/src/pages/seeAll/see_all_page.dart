@@ -46,7 +46,6 @@ class _SeeAllPageState extends State<SeeAllPage>
           centerTitle: true,
           title: TitleMenu(title: widget.title.toUpperCase()),
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
         body: Stack(children: [
           Background(image: images[widget.index]),
           listas[widget.index]
