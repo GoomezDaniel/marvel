@@ -82,9 +82,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void bottomChange(int index) {
-    setState(() {
-      bottomSelectedIndex = index;
-    });
+    // setState(() {
+    //   bottomSelectedIndex = index;
+    // });
     pageController.animateToPage(index,
         duration: Duration(milliseconds: 500), curve: Curves.ease);
   }
