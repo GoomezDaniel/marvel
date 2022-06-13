@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../size_config.dart';
-
 class Background extends StatelessWidget {
   const Background({Key key, this.image}) : super(key: key);
 
