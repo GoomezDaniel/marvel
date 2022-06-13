@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "104679880409",
+    "project_id": "marvel-info-d97cc",
+    "storage_bucket": "marvel-info-d97cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104679880409:android:d242013850dc2bda64b0c8",
+        "android_client_info": {
+          "package_name": "com.goomezdaniel.marvel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104679880409-3dr3u88fudl68dj1oi3b6hf81nidqjj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuKuXuw3iCstoMnbMQPV7CALL4Q8sRS-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104679880409-3dr3u88fudl68dj1oi3b6hf81nidqjj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
