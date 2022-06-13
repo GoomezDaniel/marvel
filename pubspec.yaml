@@ -36,8 +36,6 @@ dependencies:
   google_fonts: ^1.1.0
   # Controlar la conexión
   connectivity: ^2.0.2
-  # Anuncios
-  firebase_admob: ^0.10.3
 
 dev_dependencies:
   flutter_test:

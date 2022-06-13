@@ -30,7 +30,7 @@ class _EventsDescriptionState extends State<EventsDescription> {
               icon: Container(
                 padding: EdgeInsets.all(8),
                 child: Icon(Icons.arrow_back_outlined,
-                    color: Theme.of(context).accentColor),
+                    color: Theme.of(context).primaryColor),
                 decoration: BoxDecoration(
                     boxShadow: [BoxShadow(color: Colors.black, blurRadius: 6)],
                     color: Theme.of(context).backgroundColor,

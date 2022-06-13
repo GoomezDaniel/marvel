@@ -40,7 +40,7 @@ class TitleMenu extends StatelessWidget {
     return Text(
       title,
       style: GoogleFonts.josefinSans(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
         fontSize: getProportionateScreenHeight(25.0),
@@ -111,7 +111,7 @@ class DescriptionObject extends StatelessWidget {
       child: Text(
         title.replaceAll('<br>', '\n'),
         style: GoogleFonts.openSans(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).primaryColor,
           fontSize: getProportionateScreenHeight(15.0),
         ),
       ),
@@ -140,7 +140,7 @@ class TitleObject extends StatelessWidget {
         title,
         textAlign: TextAlign.center,
         style: GoogleFonts.bangers(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).primaryColor,
           letterSpacing: 2,
           fontSize: getProportionateScreenHeight(25.0),
         ),

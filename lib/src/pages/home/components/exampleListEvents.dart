@@ -1,5 +1,3 @@
-import 'package:marvel/src/services/adds.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:marvel/src/commons/loading.dart';
@@ -25,11 +23,6 @@ class ExampleListEvents extends StatefulWidget {
 }
 
 class _ExampleListEventsState extends State<ExampleListEvents> {
-  /// Anuncio
-  int count = 0;
-  InterstitialAd _interstitialAd;
-  bool _interstitialReady = false;
-
   // Diseño
   List<ResultEvents> events = [];
   EventsModel event = new EventsModel();
@@ -54,25 +47,13 @@ class _ExampleListEventsState extends State<ExampleListEvents> {
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                         onTap: () {
-                          if (count >= 2 && _interstitialReady) {
-                            _interstitialAd.show();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DescriptionPage(
-                                        type: 2,
-                                        id: events[index].id.toString(),
-                                        objeto: events[index])));
-                          } else {
-                            count++;
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DescriptionPage(
-                                        type: 2,
-                                        id: events[index].id.toString(),
-                                        objeto: events[index])));
-                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DescriptionPage(
+                                      type: 2,
+                                      id: events[index].id.toString(),
+                                      objeto: events[index])));
                         },
                         child: ContainerEvents(type: events, index: index));
                   })
@@ -99,41 +80,10 @@ class _ExampleListEventsState extends State<ExampleListEvents> {
     setState(() {});
   }
 
-  /// Método que controla los adds de la app
-  void adsLoad() {
-    // Carga de Publicidad
-    _interstitialAd = InterstitialAd(
-        adUnitId: Ads.intersticial,
-        listener: (MobileAdEvent event) {
-          switch (event) {
-            case MobileAdEvent.loaded:
-              _interstitialReady = true;
-              break;
-            case MobileAdEvent.failedToLoad:
-              _interstitialReady = false;
-              break;
-            case MobileAdEvent.closed:
-              count = 0;
-              _interstitialAd.dispose();
-              adsLoad();
-              break;
-            default:
-          }
-        });
-    _interstitialAd.load();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _interstitialAd.dispose();
-  }
-
   @override
   void initState() {
     super.initState();
     if (events.length <= 0) _getEvents();
-    adsLoad();
   }
 }
 

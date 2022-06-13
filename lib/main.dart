@@ -1,5 +1,3 @@
-import 'package:marvel/src/services/adds.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,7 +22,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.dark,
         primarySwatch: Colors.grey,
         backgroundColor: Colors.black,
-        accentColor: Colors.white,
+        primaryColor: Colors.white,
         cardColor: Colors.grey[350],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -35,7 +33,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    FirebaseAdMob.instance.initialize(appId: Ads.appId);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 }

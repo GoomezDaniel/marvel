@@ -1,8 +1,6 @@
 import 'dart:math';
 import 'dart:convert';
-import 'package:marvel/src/services/adds.dart';
 import 'package:crypto/crypto.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -27,11 +25,6 @@ class FullListEvents extends StatefulWidget {
 }
 
 class _FullListEventsState extends State<FullListEvents> {
-  /// Anuncio
-  int count = 0;
-  InterstitialAd _interstitialAd;
-  bool _interstitialReady = false;
-
   // List
   List<ResultEvents> resultados = [];
   EventsModel events;
@@ -65,25 +58,13 @@ class _FullListEventsState extends State<FullListEvents> {
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onTap: () {
-                        if (count >= 2 && _interstitialReady) {
-                          _interstitialAd.show();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DescriptionPage(
-                                      type: 2,
-                                      id: resultados[index].id.toString(),
-                                      objeto: resultados[index])));
-                        } else {
-                          count++;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DescriptionPage(
-                                      type: 2,
-                                      id: resultados[index].id.toString(),
-                                      objeto: resultados[index])));
-                        }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DescriptionPage(
+                                    type: 2,
+                                    id: resultados[index].id.toString(),
+                                    objeto: resultados[index])));
                       },
                       child: ContainerEventsList(
                         type: resultados,
@@ -167,42 +148,10 @@ class _FullListEventsState extends State<FullListEvents> {
         duration: Duration(milliseconds: 250), curve: Curves.fastOutSlowIn);
   }
 
-  /// Método que controla los adds de la app
-  void adsLoad() {
-    // Carga de Publicidad
-    _interstitialAd = InterstitialAd(
-        adUnitId: Ads.intersticial,
-        listener: (MobileAdEvent event) {
-          switch (event) {
-            case MobileAdEvent.loaded:
-              _interstitialReady = true;
-              break;
-            case MobileAdEvent.failedToLoad:
-              _interstitialReady = false;
-              break;
-            case MobileAdEvent.closed:
-              count = 0;
-              _interstitialAd.dispose();
-              adsLoad();
-              break;
-            default:
-          }
-        });
-    _interstitialAd.load();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _interstitialAd.dispose();
-    _scrollController.dispose();
-  }
-
   @override
   void initState() {
     super.initState();
     if (resultados.length <= 0) _getList();
-    adsLoad();
 
     // Controlador del scroll
     _scrollController.addListener(() {

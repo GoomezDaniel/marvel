@@ -1,5 +1,3 @@
-import 'package:marvel/src/services/adds.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
@@ -26,11 +24,6 @@ class ExampleListSeries extends StatefulWidget {
 }
 
 class _ExampleListSeriesState extends State<ExampleListSeries> {
-  /// Anuncio
-  int count = 0;
-  InterstitialAd _interstitialAd;
-  bool _interstitialReady = false;
-
   // Diseño
   List<ResultSeries> series = [];
   SeriesModel serie = new SeriesModel();
@@ -57,25 +50,13 @@ class _ExampleListSeriesState extends State<ExampleListSeries> {
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                         onTap: () {
-                          if (count >= 2 && _interstitialReady) {
-                            _interstitialAd.show();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DescriptionPage(
-                                        type: 3,
-                                        id: series[index].id.toString(),
-                                        objeto: series[index])));
-                          } else {
-                            count++;
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DescriptionPage(
-                                        type: 3,
-                                        id: series[index].id.toString(),
-                                        objeto: series[index])));
-                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DescriptionPage(
+                                      type: 3,
+                                      id: series[index].id.toString(),
+                                      objeto: series[index])));
                         },
                         child: ContainerSeries(type: series, index: index));
                   })
@@ -102,41 +83,10 @@ class _ExampleListSeriesState extends State<ExampleListSeries> {
     setState(() {});
   }
 
-  /// Método que controla los adds de la app
-  void adsLoad() {
-    // Carga de Publicidad
-    _interstitialAd = InterstitialAd(
-        adUnitId: Ads.intersticial,
-        listener: (MobileAdEvent event) {
-          switch (event) {
-            case MobileAdEvent.loaded:
-              _interstitialReady = true;
-              break;
-            case MobileAdEvent.failedToLoad:
-              _interstitialReady = false;
-              break;
-            case MobileAdEvent.closed:
-              count = 0;
-              _interstitialAd.dispose();
-              adsLoad();
-              break;
-            default:
-          }
-        });
-    _interstitialAd.load();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _interstitialAd.dispose();
-  }
-
   @override
   void initState() {
     super.initState();
     if (series.length <= 0) _getSeries();
-    adsLoad();
   }
 }
 
@@ -184,7 +134,7 @@ class ContainerSeries extends StatelessWidget {
             child: Container(
               width: getProportionateScreenHeight(280) / 1.7,
               decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).primaryColor,
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(10))),
               padding: EdgeInsets.all(getProportionateScreenHeight(8)),

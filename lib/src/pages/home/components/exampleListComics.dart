@@ -1,5 +1,3 @@
-import 'package:marvel/src/services/adds.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
@@ -26,11 +24,6 @@ class ExampleListComics extends StatefulWidget {
 }
 
 class _ExampleListComicsState extends State<ExampleListComics> {
-  /// Anuncio
-  int count = 0;
-  InterstitialAd _interstitialAd;
-  bool _interstitialReady = false;
-
   // Diseño
   List<ResultComics> comics = [];
   ComicsModel comic = new ComicsModel();
@@ -56,25 +49,13 @@ class _ExampleListComicsState extends State<ExampleListComics> {
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                         onTap: () {
-                          if (count >= 2 && _interstitialReady) {
-                            _interstitialAd.show();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DescriptionPage(
-                                        type: 1,
-                                        id: comics[index].id.toString(),
-                                        objeto: comics[index])));
-                          } else {
-                            count++;
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DescriptionPage(
-                                        type: 1,
-                                        id: comics[index].id.toString(),
-                                        objeto: comics[index])));
-                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DescriptionPage(
+                                      type: 1,
+                                      id: comics[index].id.toString(),
+                                      objeto: comics[index])));
                         },
                         child: ContainerComics(type: comics, index: index));
                   })
@@ -101,41 +82,10 @@ class _ExampleListComicsState extends State<ExampleListComics> {
     setState(() {});
   }
 
-  /// Método que controla los adds de la app
-  void adsLoad() {
-    // Carga de Publicidad
-    _interstitialAd = InterstitialAd(
-        adUnitId: Ads.intersticial,
-        listener: (MobileAdEvent event) {
-          switch (event) {
-            case MobileAdEvent.loaded:
-              _interstitialReady = true;
-              break;
-            case MobileAdEvent.failedToLoad:
-              _interstitialReady = false;
-              break;
-            case MobileAdEvent.closed:
-              count = 0;
-              _interstitialAd.dispose();
-              adsLoad();
-              break;
-            default:
-          }
-        });
-    _interstitialAd.load();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _interstitialAd.dispose();
-  }
-
   @override
   void initState() {
     super.initState();
     if (comics.length <= 0) _getComics();
-    adsLoad();
   }
 }
 
@@ -181,7 +131,7 @@ class ContainerComics extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10))),

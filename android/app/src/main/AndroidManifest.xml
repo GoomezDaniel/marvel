@@ -9,13 +9,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="io.flutter.app.FlutterApplication"
         android:label="Comics marvel - Info"
         android:icon="@drawable/icono">
-
-        <meta-data
-              android:name="com.google.android.gms.ads.APPLICATION_ID"
-              android:value="ca-app-pub-6394239233693353~3893325978"/>
 
         <activity
             android:name=".MainActivity"
